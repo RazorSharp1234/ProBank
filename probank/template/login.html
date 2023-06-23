@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Page</title>
+    <style>
+        body {
+            background-image: url('/media/img.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 300px;
+            margin: 100px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"] {
+            background-color: #4CAF50;
+            color: #fff;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            width: 100%;
+        }
+
+        input[type="submit"]:hover {
+            background-color: #45a049;
+        }
+
+        .home-button {
+            display: block;
+            text-align: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Login Page</h1>
+    <form action="login" method="post">
+        {% csrf_token %}
+        <input type="text" name="username" placeholder="Enter your Username"> <br>
+        <input type="password" name="password" placeholder="Enter your password"><br>
+        <input type="submit" value="Submit">
+    </form>
+    <div style="display: flex; justify-content: space-between;">
+        <a href="index" class="home-button" style="width: 200px; margin: 0; padding: 10px 20px; background-color: black; color: #fff; text-decoration: none; border-radius: 4px;">Home</a>
+        <a href="register" class="home-button" style="width: 200px; margin: 0; padding: 10px 20px; background-color: black; color: #fff; text-decoration: none; border-radius: 4px;">Sign Up</a>
+    </div>
+</div>
+</body>
+</html>

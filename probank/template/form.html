@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Application Page</title>
+    <style>
+        body {
+            background-image: url('/media/img.png');
+            background-repeat: no-repeat;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+
+        .container {
+            width: 400px;
+            margin: 100px auto;
+            background-color: #ffffff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        h1 {
+            text-align: center;
+        }
+
+        form {
+            margin-top: 20px;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input[type="text"],
+        input[type="date"],
+        input[type="number"],
+        select {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            box-sizing: border-box;
+            margin-bottom: 10px;
+        }
+
+        input[type="submit"],
+        a {
+            display: block;
+            width: 100%;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: #fff;
+            text-align: center;
+            text-decoration: none;
+            border-radius: 4px;
+        }
+
+        input[type="submit"]:hover,
+        a:hover {
+            background-color: #45a049;
+        }
+
+        .message {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <h1>Application Page</h1>
+    <form  method="POST" action="{% url 'form' %}">
+        {% csrf_token %}
+        <label for="name">Name:</label>
+        <input type="text" name="name" placeholder="Enter your Name">
+
+        <label for="dob">Date of Birth:</label>
+        <input type="date" name="dob">
+
+        <label for="age">Age:</label>
+        <input type="number" name="age">
+
+        <label for="gender">Gender:</label>
+        <input type="text" name="gender">
+
+        <label for="phone">Phone Number:</label>
+        <input type="text" name="phone">
+
+        <label for="email">Email:</label>
+        <input type="email" name="email">
+
+        <label for="address">Address:</label>
+        <input type="text" name="address">
+
+        <label for="district">District:</label>
+        <select name="district" id="districtSelect">
+            <option value="district0">Select a district</option>
+            <option value="district1">Trivandrum</option>
+            <option value="district2">Ernakulam</option>
+            <option value="district3">Alappuzha</option>
+            <option value="district4">Kottayam</option>
+            <option value="district5">Kozhikode</option>
+            <!-- Add more options for districts -->
+        </select>
+
+        <label for="branch">Branch:</label>
+        <select name="branch" id="branchSelect">
+            <option value="">Select a District first</option>
+
+<!--            <option value="branch1">Branch 1</option>-->
+<!--            <option value="branch2">Branch 2</option>-->
+<!--            &lt;!&ndash; Add more options for branches &ndash;&gt;-->
+        </select>
+
+        <label for="account-type">Account Type:</label>
+        <select name="account-type">
+            <option value="savings">Savings Account</option>
+            <option value="current">Current Account</option>
+            <!-- Add more options for account types -->
+        </select>
+
+        <label for="materials">Materials Provided:</label>
+        <input type="checkbox" name="materials" value="debit-card"> Debit Card
+        <input type="checkbox" name="materials" value="credit-card"> Credit Card
+        <input type="checkbox" name="materials" value="cheque-book"> Cheque Book
+        <!-- Add more checkbox options for materials -->
+
+        <input type="submit" value="Submit">
+    </form>
+    <div class="message">
+        <a href="{% url 'index_html' %}">Return to Home Page</a>
+    </div>
+
+    <script>
+    document.querySelector('form').addEventListener('submit', function(event) {
+        event.preventDefault();  // Prevent form submission
+
+        // Show a popup message
+        alert('Application Accepted');
+
+        // Redirect to the home page
+        window.location.href = "{% url 'index_html' %}";
+    });
+</script>
+<script>
+// Get references to the select elements
+var districtSelect = document.getElementById('districtSelect');
+var branchSelect = document.getElementById('branchSelect');
+
+// Define the branch options based on the selected district
+var branchOptions = {
+    district0: ["Select a district first"],
+    district1: ["Select a branch", "Chirayinkeezhu", "Neyyattinkara", "Varkala"],
+    district2: ["Select a branch", "Paravur", "Kothamangalam", "Kochi"],
+    district3: ["Select a branch", "Cherthala", "Ambalappuzha", "Kuttanadu"],
+    district4: ["Select a branch", "Changanassery", "Kanjirappally", "Vaikom"],
+    district5: ["Select a branch", "Balusseri ", "Chelannur ", "Perambra"]
+    // Add more options for districts and their corresponding branches
+};
+
+// Function to update the branch options based on the selected district
+function updateBranchOptions() {
+    var selectedDistrict = districtSelect.value;
+    var branches = branchOptions[selectedDistrict] || [];
+
+    // Clear previous options
+    branchSelect.innerHTML = '';
+
+    // Add new options
+    if (branches.length > 0) {
+        branches.forEach(function(branch) {
+            var option = document.createElement('option');
+            option.value = branch;
+            option.textContent = branch;
+            branchSelect.appendChild(option);
+        });
+    } else {
+        var option = document.createElement('option');
+        option.textContent = 'No branches available';
+        branchSelect.appendChild(option);
+    }
+}
+
+// Add event listener to update branch options when district selection changes
+districtSelect.addEventListener('change', updateBranchOptions);
+</script>
+</div>
+</body>
+</html>

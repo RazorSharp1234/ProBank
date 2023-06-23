@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Form Example</title>
+    <script>
+        // Function to populate the branch dropdown based on the selected district
+        function populateBranches() {
+            var district = document.getElementById("district").value;
+            var branchDropdown = document.getElementById("branch");
+            branchDropdown.innerHTML = "";
+
+            // Map districts to their corresponding sub areas (branches)
+            var branchesByDistrict = {
+                "Ernakulam": ["Aluva", "Edapally"],
+                "District2": ["Branch1", "Branch2"],
+                // Add more districts and branches as needed
+            };
+
+            // Populate the branch dropdown with options
+            for (var i = 0; i < branchesByDistrict[district].length; i++) {
+                var branchOption = document.createElement("option");
+                branchOption.text = branchesByDistrict[district][i];
+                branchDropdown.add(branchOption);
+            }
+        }
+    </script>
+</head>
+<body>
+    <button onclick="document.getElementById('form').style.display = 'block'">Show Form</button>
+
+    <form id="form" style="display: none;">
+        <label for="name">Name:</label>
+        <input type="text" id="name" required><br>
+
+        <label for="dob">DOB:</label>
+        <input type="date" id="dob" required><br>
+
+        <label for="age">Age:</label>
+        <input type="number" id="age" required><br>
+
+        <label for="gender">Gender:</label>
+        <select id="gender" required>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+            <option value="other">Other</option>
+        </select><br>
+
+        <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" required><br>
+
+        <label for="email">Email:</label>
+        <input type="email" id="email" required><br>
+
+        <label for="address">Address:</label>
+        <textarea id="address" required></textarea><br>
+
+        <label for="district">District:</label>
+        <select id="district" onchange="populateBranches()" required>
+            <option value="">Select District</option>
+            <option value="Ernakulam">Ernakulam</option>
+            <option value="District2">District2</option>
+            <!-- Add more districts as needed -->
+        </select><br>
+
+        <label for="branch">Branch:</label>
+        <select id="branch" required></select><br>
+
+        <label for="accountType">Account Type:</label>
+        <select id="accountType" required>
+            <option value="savings">Savings Account</option>
+            <option value="current">Current Account</option>
+            <!-- Add more account types as needed -->
+        </select><br>
+
+        <label>Materials Provided:</label><br>
+        <input type="checkbox" id="debitCard" value="debitCard">
+        <label for="debitCard">Debit Card</label><br>
+
+        <input type="checkbox" id="creditCard" value="creditCard">
+        <label for="creditCard">Credit Card</label><br>
+
+        <input type="checkbox" id="chequeBook" value="chequeBook">
+        <label for="chequeBook">Cheque Book</label><br>
+
+        <button type="submit">Submit</button>
+    </form>
+
+    <div id="message" style="display: none;">
+        <p>Application accepted</p>
+        <a href="home.html">Return to Home Page</a>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById("form").addEventListener("submit", function(event) {
+            event.preventDefault(); // Prevent the form from submitting normally
+            document.getElementById("form").style.display = "none";
+            document.getElementById("message").style.display = "block";
+        });
+    </script>
+</body>
+</html>
